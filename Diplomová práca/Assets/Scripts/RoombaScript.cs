@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RoombaScript : MonoBehaviour
 {
@@ -12,12 +13,20 @@ public class RoombaScript : MonoBehaviour
     public float rightPower;
     public float leftPower;
 
-    [SerializeField] private CapsuleCollider bumperSensor;
-    private bool _bumperSensorData;
+    [SerializeField] private CapsuleCollider leftBumperSensor;
+    [SerializeField] private CapsuleCollider rightBumperSensor;
+    private bool _leftBumperSensorData;
+    private bool _rightBumperSensorData;
 
     [SerializeField] private float sensorMaxDistance;
     [SerializeField] private List<Transform> distanceSensors;
     private List<float> _distanceSensorData = new List<float>();
+
+    [SerializeField] private float cliffSensorMaxDistance;
+    [SerializeField] private List<Transform> cliffSensors;
+    private List<float> _cliffSensorData = new List<float>();
+
+    [SerializeField] private bool debugData;
 
     private LayerMask _raycastLayerMask;
 
@@ -38,6 +47,7 @@ public class RoombaScript : MonoBehaviour
     private void Awake()
     {
         distanceSensors.ForEach(_ => _distanceSensorData.Add(-1f));
+        cliffSensors.ForEach(_ => _cliffSensorData.Add(-1));
         _raycastLayerMask = LayerMask.GetMask("Default");
     }
 
@@ -53,12 +63,29 @@ public class RoombaScript : MonoBehaviour
         // Sensors
         for (int i = 0; i < distanceSensors.Count; i++)
             _distanceSensorData[i] = Physics.Raycast(distanceSensors[i].position, distanceSensors[i].forward, out RaycastHit raycastHit, sensorMaxDistance, _raycastLayerMask, QueryTriggerInteraction.Ignore) ? raycastHit.distance : -1f;
+        
+        for (int i = 0; i < cliffSensors.Count; i++)
+            _cliffSensorData[i] = Physics.Raycast(cliffSensors[i].position, -cliffSensors[i].up, out RaycastHit raycastHit, cliffSensorMaxDistance, _raycastLayerMask, QueryTriggerInteraction.Ignore) ? raycastHit.distance : -1f;
 
         Vector3 capsuleStart;
         Vector3 capsuleEnd;
         float capsuleRadius;
-        GetCapsuleData(bumperSensor, out capsuleStart, out capsuleEnd, out capsuleRadius);
-        _bumperSensorData = Physics.CheckCapsule(capsuleStart, capsuleEnd, capsuleRadius, _raycastLayerMask, QueryTriggerInteraction.Ignore);
+        
+        GetCapsuleData(leftBumperSensor, out capsuleStart, out capsuleEnd, out capsuleRadius);
+        _leftBumperSensorData = Physics.CheckCapsule(capsuleStart, capsuleEnd, capsuleRadius, _raycastLayerMask, QueryTriggerInteraction.Ignore);
+        
+        GetCapsuleData(rightBumperSensor, out capsuleStart, out capsuleEnd, out capsuleRadius);
+        _rightBumperSensorData = Physics.CheckCapsule(capsuleStart, capsuleEnd, capsuleRadius, _raycastLayerMask, QueryTriggerInteraction.Ignore);
+
+        if (debugData)
+        {
+            Debug.Log("Distance sensors:");
+            GetSensorData().ForEach(d => Debug.Log(d.Distance));
+            Debug.Log("Cliff sensors:");
+            GetCliffSensorData().ForEach(d => Debug.Log(d.Distance));
+            Debug.Log("LeftBumper: " + GetLeftBumperData());
+            Debug.Log("RightBumper: " + GetRightBumperData());
+        }
     }
 
     public List<Sensor> GetSensorData()
@@ -69,11 +96,24 @@ public class RoombaScript : MonoBehaviour
         return sensors;
     }
     
+    public List<Sensor> GetCliffSensorData()
+    {
+        List<Sensor> sensors = new List<Sensor>();
+        for (int i = 0; i < cliffSensors.Count; i++)
+            sensors.Add(new Sensor(cliffSensors[i], _cliffSensorData[i]));
+        return sensors;
+    }
+    
     public Sensor GetSensorData(int index) => new Sensor(distanceSensors[index], _distanceSensorData[index]);
 
     public int GetSensorCount() => distanceSensors.Count;
 
-    public bool GetBumperSensorData() => _bumperSensorData;
+    public Sensor GetCliffSensorData(int index) => new Sensor(cliffSensors[index], _cliffSensorData[index]);
+
+    public int GetCliffSensorCount() => cliffSensors.Count;
+
+    public bool GetLeftBumperData() => _leftBumperSensorData;
+    public bool GetRightBumperData() => _rightBumperSensorData;
 }
 
 public struct Sensor

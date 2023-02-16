@@ -41,6 +41,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\NavigationScript.cs" />
      <Compile Include="Assets\Scripts\RoombaScript.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Models" />
