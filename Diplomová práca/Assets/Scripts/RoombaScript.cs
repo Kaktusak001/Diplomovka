@@ -88,6 +88,14 @@ public class RoombaScript : MonoBehaviour
         }
     }
 
+    public void ResetRoomba()
+    {
+        rightPower = 0;
+        leftPower = 0;
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+    }
+
     public List<Sensor> GetSensorData()
     {
         List<Sensor> sensors = new List<Sensor>();
