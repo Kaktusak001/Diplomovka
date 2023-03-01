@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &68347338
 Transform:
   m_ObjectHideFlags: 0
@@ -450,18 +450,26 @@ MonoBehaviour:
   rightBumperSensor: {fileID: 629079831}
   sensorMaxDistance: 1
   distanceSensors:
-  - {fileID: 1173655075}
-  - {fileID: 527933920}
-  - {fileID: 215491414}
-  - {fileID: 1399932885}
-  - {fileID: 68347338}
+  - {fileID: 1586306262}
   cliffSensorMaxDistance: 0.5
+  cliffSensorActivationDistance: 0.04
   cliffSensors:
   - {fileID: 560765418}
   - {fileID: 17935479}
   - {fileID: 1831291959}
   - {fileID: 1964997676}
   debugData: 0
+  debugGizmos: 1
+  navigation: {fileID: 653015819}
+  distanceCalibration: 10.01
+  estimatedPosition: {x: 0, y: 0, z: 0}
+  estimatedRotation: 0
+  samplingRate: 500
+  maxPreviousTransforms: 100
+  maxWallCount: 1000
+  minWallDistance: 0.01
+  wallCombineDistance: 0.1
+  wallCombineAngle: 5
 --- !u!54 &137067313
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -565,7 +573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178423894}
   m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -0.1, y: 0.025, z: 0.1}
+  m_LocalPosition: {x: -0.085, y: 0.025, z: 0.115}
   m_LocalScale: {x: 0.25, y: 0.02, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -583,7 +591,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.2
-  m_Height: 1.1
+  m_Height: 0.9
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &215491413
@@ -601,7 +609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &215491414
 Transform:
   m_ObjectHideFlags: 0
@@ -853,7 +861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &527933920
 Transform:
   m_ObjectHideFlags: 0
@@ -925,7 +933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629079829}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0.1, y: 0.025, z: 0.1}
+  m_LocalPosition: {x: 0.085, y: 0.025, z: 0.115}
   m_LocalScale: {x: 0.25, y: 0.02, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -943,7 +951,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.2
-  m_Height: 1.1
+  m_Height: 0.9
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &653015818
@@ -979,8 +987,15 @@ MonoBehaviour:
   roomba: {fileID: 137067312}
   console: {fileID: 653015821}
   distanceSensitivity: 0.01
-  distanceCalibration: 10
-  rotationCalibration: 1.6
+  wallFollowDistance: 0.03
+  wallFollowTolerance: 0.01
+  correctionAngle: 5
+  sweepWidth: 20
+  distanceCalibration: 10.02
+  rotationCalibration: 1.588
+  commands: []
+  estimatedPosition: {x: 0, y: 0, z: 0}
+  estimatedRotation: 0
 --- !u!4 &653015820
 Transform:
   m_ObjectHideFlags: 0
@@ -2202,7 +2217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1173655075
 Transform:
   m_ObjectHideFlags: 0
@@ -2458,7 +2473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1399932885
 Transform:
   m_ObjectHideFlags: 0
@@ -2758,7 +2773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2048692709
 Transform:
   m_ObjectHideFlags: 0

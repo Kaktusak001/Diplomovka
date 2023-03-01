@@ -42,8 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\NavigationScript.cs" />
-     <Compile Include="Assets\Scripts\RoombaScript.cs" />
      <Compile Include="Assets\Scripts\ConsoleScript.cs" />
+     <Compile Include="Assets\Scripts\RoombaScript.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Models" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
