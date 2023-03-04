@@ -458,6 +458,8 @@ MonoBehaviour:
   - {fileID: 17935479}
   - {fileID: 1831291959}
   - {fileID: 1964997676}
+  baseStation: {fileID: 653015820}
+  baseDetectDistance: 0.3
   debugData: 0
   debugGizmos: 1
   navigation: {fileID: 653015819}
@@ -466,10 +468,8 @@ MonoBehaviour:
   estimatedRotation: 0
   samplingRate: 500
   maxPreviousTransforms: 100
-  maxWallCount: 1000
-  minWallDistance: 0.01
-  wallCombineDistance: 0.1
-  wallCombineAngle: 5
+  calibrationTime: 10
+  CALIBRATE: 0
 --- !u!54 &137067313
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -986,16 +986,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomba: {fileID: 137067312}
   console: {fileID: 653015821}
-  distanceSensitivity: 0.01
-  wallFollowDistance: 0.03
-  wallFollowTolerance: 0.01
-  correctionAngle: 5
-  sweepWidth: 20
-  distanceCalibration: 10.02
-  rotationCalibration: 1.588
-  commands: []
-  estimatedPosition: {x: 0, y: 0, z: 0}
-  estimatedRotation: 0
+  grid: []
+  cellSize: 0.05
+  sweepWidth: 0.2
 --- !u!4 &653015820
 Transform:
   m_ObjectHideFlags: 0

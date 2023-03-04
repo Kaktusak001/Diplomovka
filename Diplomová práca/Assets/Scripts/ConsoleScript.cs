@@ -42,15 +42,6 @@ public class ConsoleScript : MonoBehaviour
             case 1:
                 switch (parts[0])
                 {
-                    case "/reset":
-                        roomba.ResetRoomba();
-                        break;
-                    case "/calibrate":
-                        navigation.Calibrate();
-                        break;
-                    case "/stop":
-                        navigation.Stop(true, false);
-                        break;
                     case "/sensors":
                         string tmp = "";
                         roomba.GetSensorData().ForEach(s => tmp += ", " + s.Distance);
@@ -70,36 +61,6 @@ public class ConsoleScript : MonoBehaviour
             case 2:
                 switch (parts[0])
                 {
-                    case "/followwall":
-                        if (float.TryParse(parts[1], out float0) && float0 > 0f)
-                            navigation.commands.Add(navigation.FollowWall(float0, 1f));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
-                    case "/forward":
-                        if (float.TryParse(parts[1], out float0) && float0 > 0f)
-                            navigation.commands.Add(navigation.Forward(float0, 1f));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
-                    case "/backward":
-                        if (float.TryParse(parts[1], out float0) && float0 > 0f)
-                            navigation.commands.Add(navigation.Backward(float0, 1f));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
-                    case "/right":
-                        if (float.TryParse(parts[1], out float0) && float0 is > 0f or <= 180f)
-                            navigation.commands.Add(navigation.Right(float0, 1f));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
-                    case "/left":
-                        if (float.TryParse(parts[1], out float0) && float0 is > 0f or <= 180f)
-                            navigation.commands.Add(navigation.Left(float0, 1f));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
                     default:
                         PrintLine("Invalid command!");
                         break;
@@ -108,36 +69,6 @@ public class ConsoleScript : MonoBehaviour
             case 3:
                 switch (parts[0])
                 {
-                    case "/followwall":
-                        if (float.TryParse(parts[1], out float0) && float.TryParse(parts[2], out float1) && float0 > 0f && float1 is > 0f or <= 1f)
-                            navigation.commands.Add(navigation.FollowWall(float0, float1));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
-                    case "/forward":
-                        if (float.TryParse(parts[1], out float0) && float.TryParse(parts[2], out float1) && float0 > 0f && float1 is > 0f or <= 1f)
-                            navigation.commands.Add(navigation.Forward(float0, float1));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
-                    case "/backward":
-                        if (float.TryParse(parts[1], out float0) && float.TryParse(parts[2], out float1) && float0 > 0f && float1 is > 0f or <= 1f)
-                            navigation.commands.Add(navigation.Backward(float0, float1));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
-                    case "/right":
-                        if (float.TryParse(parts[1], out float0) && float.TryParse(parts[2], out float1) && float0 is > 0f or <= 180f && float1 is > 0f or <= 1f)
-                            navigation.commands.Add(navigation.Right(float0, float1));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
-                    case "/left":
-                        if (float.TryParse(parts[1], out float0) && float.TryParse(parts[2], out float1) && float0 is > 0f or <= 180f && float1 is > 0f or <= 1f)
-                            navigation.commands.Add(navigation.Left(float0, float1));
-                        else
-                            PrintLine("Invalid command!");
-                        break;
                     default:
                         PrintLine("Invalid command!");
                         break;
