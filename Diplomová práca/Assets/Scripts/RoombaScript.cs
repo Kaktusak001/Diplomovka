@@ -287,6 +287,11 @@ public class RoombaScript : MonoBehaviour
         estimatedRotation = 0f;
     }
 
+    public float DistToTime(float distance) => (float)(distance * distanceCalibration);
+    public float RotToTime(float angle) => (float) (wheelDistance * angle * 0.5f * distanceCalibration);
+
+    public float GetSensorMaxDistance => sensorMaxDistance;
+
     public List<Sensor> GetSensorData()
     {
         List<Sensor> sensors = new List<Sensor>();
@@ -305,9 +310,9 @@ public class RoombaScript : MonoBehaviour
 
     public bool DetectCliff(out List<bool> sensorActivation)
     {
-        sensorActivation = new List<bool>();
-        var list = sensorActivation;
-        GetSensorData().ForEach(s => list.Add(s.Distance > cliffSensorActivationDistance || s.Distance < 0f));
+        List<bool> list = new List<bool>();
+        GetCliffSensorData().ForEach(s => list.Add(s.Distance > cliffSensorActivationDistance || s.Distance < 0f));
+        sensorActivation = list;
         return sensorActivation.Any(s => s);
     }
 

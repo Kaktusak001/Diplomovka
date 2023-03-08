@@ -989,6 +989,10 @@ MonoBehaviour:
   grid: []
   cellSize: 0.05
   sweepWidth: 0.2
+  lineSubDivision: 0.005
+  angleAdjust: 45
+  distanceAdjust: 0.5
+  commands: []
 --- !u!4 &653015820
 Transform:
   m_ObjectHideFlags: 0
